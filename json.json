@@ -1,0 +1,62 @@
+﻿{
+  "featured": [
+    {
+      "SteamID": "146",
+      "CoinPrice": "69420",
+      "DisplayImage": "1",
+      "PurchaseURL": "",
+      "ShowSpecial": false,
+      "SpecialText": ""
+    },
+    {
+      "SteamID": "142",
+      "CoinPrice": "20",
+      "DisplayImage": "1",
+      "PurchaseURL": "",
+      "ShowSpecial": false,
+      "SpecialText": ""
+    }
+  ],
+  "regular": [
+    {
+      "SteamID": "136",
+      "CoinPrice": "20",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "139",
+      "CoinPrice": "70",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "127",
+      "CoinPrice": "100",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "149",
+      "CoinPrice": "50",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "143",
+      "CoinPrice": "20",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "137",
+      "CoinPrice": "70",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "120",
+      "CoinPrice": "20",
+      "PurchaseURL": ""
+    },
+    {
+      "SteamID": "129",
+      "CoinPrice": "20",
+      "PurchaseURL": ""
+    }
+  ]
+}		

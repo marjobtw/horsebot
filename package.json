@@ -1,0 +1,32 @@
+{
+  "name": "horsebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "country-code-emoji": "^2.3.0",
+    "country-list": "^2.2.0",
+    "discord.js": "^14.0.0-dev.1650240532-9ef7ffd",
+    "discord.js-pages": "^1.4.3",
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "resize-image-buffer": "^1.0.0",
+    "sharp": "^0.28.3",
+    "string-similarity": "^4.0.4",
+    "trello-events": "^0.1.7",
+    "util": "^0.12.4",
+    "xml2json": "^0.12.0"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1"
+  }
+}
