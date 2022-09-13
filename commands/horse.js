@@ -7,7 +7,7 @@ module.exports = {
     ///aliases: [""],
     description: "Sends random image from thishorsedoesnotexist.com",
     visible: true,
-    enabled: false,
+    enabled: true,
     async execute(message) {
         let attachment = new AttachmentBuilder();
         attachment.setName("horsedoesnotexist.png");

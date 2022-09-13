@@ -11,7 +11,7 @@ module.exports = {
     ///aliases: [""],
     description: "Simulates welcome message",
     visible: false,
-    enabled: false,
+    enabled: true,
     async execute(message) {
         if(!enabled) return;
         if(message.author != undefined) return;
