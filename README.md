@@ -10,16 +10,7 @@ Horsebot is the official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">
 
 - [Installation](#installation)
     - [Creating environment variables](#creating-environment-variables)
-    - [Composer](#composer)
-- [TYPO3 setup](#typo3-setup)
-    - [Extension](#extension)
-    - [Database](#database)
-- [Page setup](#page-setup)
-    - [Upload the page tree file](#upload-the-page-tree-file)
-    - [Go to the import view](#go-to-the-import-view)
-    - [Import the page tree](#import-the-page-tree)
-    - [SEO-friendly URLs](#seo-friendly-urls)
-- [License](#license)
+- [Commands](#commands)
 - [Links](#links)
   
 ## Installation
@@ -44,3 +35,14 @@ STEAM_API_KEY=YOUR_STEAM_API_KEY
 ```
   
    </ol>
+   
+## Commands
+
+- <b>/horse</b> - Sends random image from thishorsedoesnotexist.com
+- <b>/inspect</b> - Inspects user's Steam inventory using SteamId64
+- <b>/inventory</b> - Displays user's Steam inventory using SteamId64
+- <b>/item</b> Displays information about the Steam item
+- <b>/ping</b> - Checks Horsebot's response time to Discord
+- <b>/suggest</b> - Add a suggestion to the suggestions channel
+- <b>/userinfo</b> - Displays information about the user
+- <b>/wiki</b> - Displays wiki statistics
