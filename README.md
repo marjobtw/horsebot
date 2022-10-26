@@ -51,6 +51,14 @@ STEAM_API_KEY=YOUR_STEAM_API_KEY
 - <b>/userinfo</b> - Displays information about the user
 - <b>/wiki</b> - Displays wiki statistics
 
+## Links
+
+* [Kozi.dev](https://kozi.dev/)
+* [Peekio.no](https://peekio.no)
+* [Peekio API Documentation](https://peekio.no/api)
+* [Issue tracker](https://github.com/marjobtw/horsebot/issues)
+* [Source code](https://github.com/marjobtw/horsebot)
+
 <p align="center">
     <img src="https://cdn.discordapp.com/attachments/860582808790630431/1034931233131610142/Credits.png" alt="Horsebot - a collaboration between KoziDev and Peekio" height="100" />
 </p>
