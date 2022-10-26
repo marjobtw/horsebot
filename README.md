@@ -9,7 +9,7 @@ Horsebot is the official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">
 ## Table of Content
 
 - [Installation](#installation)
-    - [Creating environment variables](#typo3-extension-repository)
+    - [Creating environment variables](#creating-environment-variables)
     - [Composer](#composer)
 - [TYPO3 setup](#typo3-setup)
     - [Extension](#extension)
