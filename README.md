@@ -1,8 +1,6 @@
 <img src="https://cdn.discordapp.com/attachments/860582808790630431/1034923693438144563/HorsebotLogo.png" alt="Horsebot logo" title="Horsebot" align="right" height="60" />
 
-<h1 align="center">
-    <b>Horsebot</b>
-</h1>
+<h1><b>Horsebot</b></h1>
 <p align="center">
   Official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">Discord</a> Bot
     
