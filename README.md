@@ -3,6 +3,8 @@
 <h1><b>Horsebot</b></h1>
 
 Horsebot is the official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">Discord</a> Bot. It serves as a companion for players! Horsebot can retrieve players Steam inventories, item information and wiki data on the fly! Horsebot grabs API data from the <a href="https://www.peekio.no/api">Peekio API</a>.
+
+Horsebot was originally created for the Steam game <a href="https://store.steampowered.com/app/1391070/Stallion_Squad">Stallion Squad</a> but we're now open-sourcing the project!
     
 :star: Star us on GitHub — it motivates us a lot!
 
