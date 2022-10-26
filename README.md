@@ -6,6 +6,8 @@ Horsebot is the official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">
     
 :star: Star us on GitHub — it motivates us a lot!
 
+<img src="https://cdn.discordapp.com/attachments/860582808790630431/1034929371670122526/HorsebotShow.png" alt="Image of /inventory command in action" />
+
 ## Table of Content
 
 - [Installation](#installation)
