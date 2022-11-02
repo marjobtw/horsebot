@@ -1,10 +1,23 @@
-<h1 align="center">
-    <b>Horsebot</b>
-</h1>
-<p align="center">
-  Official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">Discord</a> Bot
+<img src="https://cdn.discordapp.com/attachments/860582808790630431/1034923693438144563/HorsebotLogo.png" alt="Horsebot logo" title="Horsebot" align="right" height="60" />
+
+<h1><b>Horsebot</b></h1>
+
+Horsebot is the official Stallion Squad <a href="https://discord.gg/JYmVCVmSR7">Discord</a> Bot. It serves as a companion for players! Horsebot can retrieve players Steam inventories, item information and wiki data on the fly! Horsebot grabs API data from the <a href="https://www.peekio.no/api">Peekio API</a>.
+
+Horsebot was originally created for the Steam game <a href="https://store.steampowered.com/app/1391070/Stallion_Squad">Stallion Squad</a> but we're now open-sourcing the project!
+    
+:star: Star us on GitHub — it motivates us a lot!
+
+<img src="https://cdn.discordapp.com/attachments/860582808790630431/1034929371670122526/HorsebotShow.png" alt="Image of /inventory command in action" />
+
+## Table of Content
+
+- [Installation](#installation)
+    - [Creating environment variables](#creating-environment-variables)
+- [Commands](#commands)
+- [Links](#links)
   
-### Installation
+## Installation
 <ol>
   <li>Extract files into a folder</li>
   <li>Open a terminal in your folder and install dependencies by using</li>
@@ -26,3 +39,26 @@ STEAM_API_KEY=YOUR_STEAM_API_KEY
 ```
   
    </ol>
+   
+## Commands
+
+- <b>/horse</b> - Sends random image from thishorsedoesnotexist.com
+- <b>/inspect</b> - Inspects user's Steam inventory using SteamId64
+- <b>/inventory</b> - Displays user's Steam inventory using SteamId64
+- <b>/item</b> Displays information about the Steam item
+- <b>/ping</b> - Checks Horsebot's response time to Discord
+- <b>/suggest</b> - Add a suggestion to the suggestions channel
+- <b>/userinfo</b> - Displays information about the user
+- <b>/wiki</b> - Displays wiki statistics
+
+## Links
+
+* [Kozi.dev](https://kozi.dev/)
+* [Peekio.no](https://peekio.no)
+* [Peekio API Documentation](https://peekio.no/api)
+* [Issue tracker](https://github.com/marjobtw/horsebot/issues)
+* [Source code](https://github.com/marjobtw/horsebot)
+
+<p align="center">
+    <img src="https://cdn.discordapp.com/attachments/860582808790630431/1034931233131610142/Credits.png" alt="Horsebot - a collaboration between KoziDev and Peekio" height="100" />
+</p>
