@@ -11,20 +11,18 @@ module.exports = {
     ///aliases: [""],
     description: "Simulates welcome message",
     visible: false,
-    enabled: true,
+    enabled: false,
     async execute(message) {
-        if(!enabled) return;
         if(message.author != undefined) return;
         const {guild} = message;
         
-        //Create a canvas and load fonts
         const canvas = Canvas.createCanvas(934, 282);
         Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankBigRegular-Black-2.otf"), {family: 'Burbank'})
         Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankSmall-Bold.otf"), {family: 'Burbank'})
         const ctx = canvas.getContext('2d');
         
-        //Get user's profile picture
         let url = message.user.displayAvatarURL();
+        
         const response = await axios.get(url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 
@@ -35,10 +33,11 @@ module.exports = {
         var profilePicture = buffered;
         const pfp = await Canvas.loadImage(buffered, ({format: 'png'}))
         
-        //Draw the pfp
         ctx.drawImage(pfp, 25, 20)
         
-        //Load the background and draw it
+        // const pfp = await Canvas.loadImage(message.user.displayAvatarURL({format: 'png', size: 256}))
+        // ctx.drawImage(pfp, 25, 20)
+        
         const background = await Canvas.loadImage(
             path.join(__dirname, '../images/welcome_background.png')
         )

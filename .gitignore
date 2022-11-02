@@ -107,3 +107,5 @@ dist
 .idea
 
 commands/moduleManagement
+
+commands/fetch.js
