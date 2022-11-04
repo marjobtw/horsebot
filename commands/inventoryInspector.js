@@ -22,6 +22,7 @@ module.exports = {
         let data, playerData;
 
         try{
+            await fetch(`http://api.kozi.dev/items/${args[0]}`, settings)
             //Fetch player inventory
             await fetch(`http://api.peekio.no/GetInventory.php?format=json&steamid=${args[0]}`, settings).then(res => res.json()).then(json => data = JSON.parse(json.response.item_json));
         }catch(e) {
@@ -39,6 +40,7 @@ module.exports = {
         await interaction.deferReply();
         let data, playerData;
         try{
+            await fetch(`http://api.kozi.dev/items/${interaction.options._hoistedOptions[0].value}`, settings)
             //Fetch player inventory
             await fetch(`http://api.peekio.no/GetInventory.php?format=json&steamid=${interaction.options._hoistedOptions[0].value}`, settings).then(res => res.json()).then(json => data = JSON.parse(json.response.item_json));
         }catch(e){

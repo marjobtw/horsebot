@@ -30,8 +30,8 @@ module.exports = {
             return message.channel.send({embeds: [new EmbedBuilder().setDescription("There was an error while trying to fetch Steam items.\nThis is a possible API error and retrying won't work!\nPlease try again later.").setColor(resolveColor("ff7070".toString(10)))]})
         }
         if(args[0] === undefined) return message.channel.send({embeds: [new EmbedBuilder().setDescription("You need to specify a valid **SteamID64**").setColor(resolveColor("ff7070".toString(10)))]});
-
         try{
+            await fetch(`http://api.kozi.dev/items/${args[0]}`, settings)
             //Fetch player inventory
             await fetch(`http://api.peekio.no/GetInventory.php?format=json&steamid=${args[0]}`, settings).then(res => res.json()).then(json => data = JSON.parse(json.response.item_json));
         }catch(e) {
@@ -59,6 +59,7 @@ module.exports = {
 		var continueScript = true;
 
         try{
+            await fetch(`http://api.kozi.dev/items/${interaction.options._hoistedOptions[0].value}`, settings)
             //Fetch player inventory
             await fetch(`http://api.peekio.no/GetInventory.php?format=json&steamid=${interaction.options._hoistedOptions[0].value}`, settings).then(res => res.json()).then(json => data = JSON.parse(json.response.item_json));
         }catch(e){
