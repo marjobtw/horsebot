@@ -1,4 +1,4 @@
-﻿const { EnumResolvers, EmbedBuilder, Util, ButtonBuilder, ButtonStyle, resolveColor} = require("discord.js");
+﻿const { EnumResolvers, EmbedBuilder, Util, ButtonBuilder, ButtonStyle, resolveColor, ActionRowBuilder} = require("discord.js");
 const { PagesBuilder, PagesManager } = require('discord.js-pages');
 var stringSimilarity = require("string-similarity");
 let commandName = "inspect"
@@ -59,6 +59,8 @@ module.exports = {
  * @param {JSON}                   playerData           Player summary of given SteamID64
  **/
 async function InventoryInspect(args, interaction, data, playerData) {
+    const builder = new PagesBuilder(interaction);
+    
     let pages = [];
     await data.forEach(element => {
         let item = interaction.client.steamItems.find(o => o.itemdefid == element.itemdefid)
@@ -83,19 +85,49 @@ async function InventoryInspect(args, interaction, data, playerData) {
                 break
             default: origin = "Not specified"
         }
+        const ownershipBtn = new ButtonBuilder()
+            .setLabel("🔎 View past owners")
+            .setStyle(3);
         
-        let page = new EmbedBuilder()
-            .setDescription(`**${item.name}**\n${desc}`)
-            .setColor(resolveColor(item.name_color))
-            .setThumbnail(`${item.icon_url_large}`)
-            .addFields(
-                {name: "Quantity", value: `${element.quantity}`, inline: false},
-                {name: "Acquired", value: `${new Date(element.acquired.replace(/(....)(..)(.....)(..)(.*)/, '$1-$2-$3:$4:$5')).toISOString().split("T")[0]} ${new Date(element.acquired.replace(/(....)(..)(.....)(..)(.*)/, '$1-$2-$3:$4:$5')).toISOString().split("T")[1].split('.')[0]}`, inline: true},
-                {name: "Origin", value: origin, inline: true})
+        const viewInInventory = new ButtonBuilder()
+            .setLabel("🌐 View on Steam")
+            .setStyle(5);
+        
+        
+        let page = () => {
+            viewInInventory.setURL(`https://steamcommunity.com/profiles/${playerData.steamid}/inventory/#1391070_2_${element.itemid}`)
+            ownershipBtn.setCustomId(element.originalitemid);
+            builder.setComponents(new ActionRowBuilder().addComponents([viewInInventory, ownershipBtn]));
+
+            return new EmbedBuilder()
+                .setDescription(`**${item.name}**\n${desc}`)
+                .setColor(resolveColor(item.name_color))
+                .setThumbnail(`${item.icon_url_large}`)
+                .addFields(
+                    {name: "Quantity", value: `${element.quantity}`, inline: false},
+                    {
+                        name: "Acquired",
+                        value: `${new Date(element.acquired.replace(/(....)(..)(.....)(..)(.*)/, '$1-$2-$3:$4:$5')).toISOString().split("T")[0]} ${new Date(element.acquired.replace(/(....)(..)(.....)(..)(.*)/, '$1-$2-$3:$4:$5')).toISOString().split("T")[1].split('.')[0]}`,
+                        inline: true
+                    },
+                    {name: "Origin", value: origin, inline: true})
+        }
         pages.push(page)
     });
     
-    await new PagesBuilder(interaction)
+    //Ownership buttons handler
+    let triggers = [];
+    await data.forEach(element => {triggers.push({name: element.originalitemid,
+        async callback(interactionCallback, button) {
+            button.setDisabled(true)
+                .setLabel('🔎 View past owners');
+
+            let reply = await getOwnerships(element.originalitemid);
+
+            interaction.reply({embeds: [reply]});
+        }})});
+    
+    await builder
         .setTitle(`${playerData.personaname}'s inventory`)
         .setPages(pages)
         .setDefaultButtons([
@@ -123,7 +155,71 @@ async function InventoryInspect(args, interaction, data, playerData) {
                     .setStyle(4)
             }]
         )
+        .setTriggers(triggers)
         .setListenEndColor(1426147)
         .setPaginationFormat(`Page: %c/%m`)
         .build();
+}
+
+async function getOwnerships(originalitemid) {
+    //make an object with owner name and date of ownership
+    let ownerships = [];
+    let owners = await fetch(`http://api.kozi.dev/ownership/${originalitemid}`, settings).then(res => res.json());
+    owners.forEach(owner => {
+        ownerships.push({name: owner.owner, date: owner.acquired});
+    });
+
+    //fetch owner steam profile
+    let steamids = [];
+    let steamprofiles = [];
+    ownerships.forEach(ownership => {
+        steamids.push(ownership.name);
+    });
+    let steamidsstring = steamids.join(",");
+    let steamprofilesjson = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.STEAM_API_KEY}&steamids=${steamidsstring}`, settings).then(res => res.json());
+
+    steamprofilesjson.response.players.forEach(profile => {
+        steamprofiles.push(profile);
+    });
+
+    //add steam profile to ownerships
+    ownerships.forEach(ownership => {
+        steamprofiles.forEach(profile => {
+            if (ownership.name == profile.steamid) {
+                ownership.profile = profile;
+            }
+        });
+    });
+
+
+    //format owners as (owner > time between next date and this date > owner2)
+    let ownersString = "";
+    for(let i = 0; i < ownerships.length; i++) {
+        if(i === ownerships.length - 1) {
+            ownersString += `${ownerships[i].profile.personaname}`;
+        }else{
+            ownersString += `${ownerships[i].profile.personaname} > ${Math.round((new Date(convertDateToDate(ownerships[i+1].date)) - new Date(convertDateToDate(ownerships[i].date))) / (1000 * 60 * 60 * 24))} days > `;
+        }
+    }
+
+    let ownersEmbed = new EmbedBuilder()
+        .setTitle("Past owners")
+        .setDescription(ownersString)
+        .setColor(resolveColor("ff7070".toString(10)));
+    return ownersEmbed;
+}
+
+function convertDateToDate(icsDate) {
+    if (!/^[0-9]{8}T[0-9]{6}Z$/.test(icsDate))
+        throw new Error("ICS Date is wrongly formatted: " + icsDate);
+
+    var year   = icsDate.substr(0, 4);
+    var month  = icsDate.substr(4, 2);
+    var day    = icsDate.substr(6, 2);
+
+    var hour   = icsDate.substr(9, 2);
+    var minute = icsDate.substr(11, 2);
+    var second = icsDate.substr(13, 2);
+
+    return new Date(Date.UTC(year, month - 1, day, hour, minute, second));
 }
