@@ -1,4 +1,4 @@
-﻿const { MessageEmbed, MessageAttachment } = require("discord.js");
+﻿const { MessageEmbed, AttachmentBuilder } = require("discord.js");
 const Canvas = require('canvas');
 const path = require('path');
 const sharp = require('sharp')
@@ -55,6 +55,7 @@ module.exports = {
         ctx.font = '50px "Burbank Big Rg Bk"'
         var text = `Welcome ${message.user.username}`
         var distance = ctx.measureText(text).width
+        getFontsize(700, 50, 30, ctx, distance, text)
         ctx.fillText(text, 300, texty)
         
         ctx.font = '36px "Burbank Small Bold"';
@@ -65,11 +66,42 @@ module.exports = {
         ctx.fillStyle = '#ffffff';
         ctx.font = '44px "Burbank Small Bold"'
         let bottomText = `You are our #${guild.memberCount} member`
-        ctx.fillText(bottomText, 300, 185)
+        distance = ctx.measureText(bottomText).width
+        getFontsize(700, 44, 30, ctx, distance, bottomText)
+        ctx.fillText(bottomText, 300, texty+50)
+        //ctx.fillText(bottomText, 300, 185)
         
-        const attachment = await new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
+        const attachment = await new AttachmentBuilder()
+            .setName('profile-image.png')
+            .setFile(canvas.toBuffer());
+        
+        
         
         return guild.channels.cache.get("596764237154484225").send({content:`Welcome <@${message.user.id}>!`, files: [attachment]}).catch(console.error);
     }
     
 };
+
+function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text) {
+    if (distance > maxWidth) {
+        var newfontSize = fontSize;
+        var decrement = 1;
+        var newWidth;
+        while (distance > maxWidth) {
+            newfontSize -= decrement;
+            if (newfontSize < minFontSize) {
+                ctx.font = `${minFontSize}px "Burbank Big Rg Bk"`
+                break;
+            }
+            ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
+            newWidth = ctx.measureText(text).width;
+            if(newWidth < maxWidth && decrement === 1){
+                decrement = 0.1;
+                newfontSize += 1;
+            } else {
+                distance = newWidth;
+            }
+        }
+        ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
+    }
+}
