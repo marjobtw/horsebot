@@ -26,14 +26,14 @@ module.exports = {
         const response = await axios.get(url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 
-        const output = await sharp(buffer).resize(256, 256).png().toBuffer();
+        const output = await sharp(buffer).resize(247, 247).png().toBuffer();
         
         let buffered = output;
         
         var profilePicture = buffered;
         const pfp = await Canvas.loadImage(buffered, ({format: 'png'}))
         
-        ctx.drawImage(pfp, 25, 20)
+        ctx.drawImage(pfp, 25, 17)
         
         // const pfp = await Canvas.loadImage(message.user.displayAvatarURL({format: 'png', size: 256}))
         // ctx.drawImage(pfp, 25, 20)
@@ -55,19 +55,19 @@ module.exports = {
         ctx.font = '50px "Burbank Big Rg Bk"'
         var text = `Welcome ${message.user.username}`
         var distance = ctx.measureText(text).width
-        getFontsize(700, 50, 30, ctx, distance, text)
+        getFontsize(600, 50, 16, ctx, distance, text)
         ctx.fillText(text, 300, texty)
         
-        ctx.font = '36px "Burbank Small Bold"';
-        let text2 =`#${message.user.discriminator}`
-        ctx.fillText(text2, 300+distance+5, texty);
+        // ctx.font = '36px "Burbank Small Bold"';
+        // let text2 =`#${message.user.discriminator}`
+        // ctx.fillText(text2, 300+distance+5, texty);
         
         //Bottom
         ctx.fillStyle = '#ffffff';
         ctx.font = '44px "Burbank Small Bold"'
         let bottomText = `You are our #${guild.memberCount} member`
         distance = ctx.measureText(bottomText).width
-        getFontsize(700, 44, 30, ctx, distance, bottomText)
+        getFontsize(700, 44, 16, ctx, distance, bottomText)
         ctx.fillText(bottomText, 300, texty+50)
         //ctx.fillText(bottomText, 300, 185)
         

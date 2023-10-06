@@ -65,9 +65,9 @@ async function getOwnerships(originalitemid) {
     let ownersString = "";
     for(let i = 0; i < ownerships.length; i++) {
         if(i === ownerships.length - 1) {
-            ownersString += `${ownerships[i].profile.personaname}`;
+            ownersString += `**${ownerships[i].profile.personaname}**`;
         }else{
-            ownersString += `${ownerships[i].profile.personaname} > ${Math.round((new Date(convertDateToDate(ownerships[i+1].date)) - new Date(convertDateToDate(ownerships[i].date))) / (1000 * 60 * 60 * 24))} days > `;
+            ownersString += `**${ownerships[i].profile.personaname}** > ${Math.round((new Date(convertDateToDate(ownerships[i+1].date)) - new Date(convertDateToDate(ownerships[i].date))) / (1000 * 60 * 60 * 24))} days > `;
         }
     }
 
