@@ -17,8 +17,10 @@ module.exports = {
         const {guild} = message;
         
         const canvas = Canvas.createCanvas(934, 282);
-        Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankBigRegular-Black-2.otf"), {family: 'Burbank'})
-        Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankSmall-Bold.otf"), {family: 'Burbank'})
+        // Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankBigRegular-Black-2.otf"), {family: 'Burbank'})
+        // Canvas.registerFont(path.join(process.cwd(), "/fonts/BurbankSmall-Bold.otf"), {family: 'Burbank'})
+        Canvas.registerFont(path.join(process.cwd(), "/fonts/Grandstander-Black.ttf"), {family: 'Grandstander'})
+        Canvas.registerFont(path.join(process.cwd(), "/fonts/Rene_Bieder_-_RationalDisplayDEMO-SemiBold.otf"), {family: 'ReneBieder'})
         const ctx = canvas.getContext('2d');
         
         let url = message.user.displayAvatarURL();
@@ -39,23 +41,23 @@ module.exports = {
         // ctx.drawImage(pfp, 25, 20)
         
         const background = await Canvas.loadImage(
-            path.join(__dirname, '../images/welcome_background.png')
+            path.join(__dirname, '../images/welcome_background2.png')
         )
         ctx.drawImage(background, 0, 0);
         
         ctx.shadowOffsetX = 3;
         ctx.shadowOffsetY = 3;
         ctx.shadowBlur = 0;
-        ctx.shadowColor = "rgba(0,0,0,0.5)"
+        ctx.shadowColor = "rgba(0,0,0,0.2)"
         
-        let texty = 125
+        let texty = 120
         
         //Top
         ctx.fillStyle = '#ffffff';
-        ctx.font = '50px "Burbank Big Rg Bk"'
+        ctx.font = '50px "Grandstander Black"'
         var text = `Welcome ${message.user.username}`
         var distance = ctx.measureText(text).width
-        getFontsize(600, 50, 16, ctx, distance, text)
+        getFontsize(600, 50, 16, ctx, distance, text, "Grandstander Black")
         ctx.fillText(text, 300, texty)
         
         // ctx.font = '36px "Burbank Small Bold"';
@@ -64,12 +66,13 @@ module.exports = {
         
         //Bottom
         ctx.fillStyle = '#ffffff';
-        ctx.font = '44px "Burbank Small Bold"'
-        let bottomText = `You are our #${guild.memberCount} member`
+        ctx.font = '44px "Rational Display DEMO SemiBold"'
+        let bottomText = `You are our #${guild.memberCount}th member!`
         distance = ctx.measureText(bottomText).width
-        getFontsize(700, 44, 16, ctx, distance, bottomText)
-        ctx.fillText(bottomText, 300, texty+50)
+        getFontsize(600, 44, 16, ctx, distance, bottomText, "Rational Display DEMO SemiBold")
+        ctx.fillText(bottomText, 300, texty+60)
         //ctx.fillText(bottomText, 300, 185)
+        
         
         const attachment = await new AttachmentBuilder()
             .setName('profile-image.png')
@@ -82,7 +85,7 @@ module.exports = {
     
 };
 
-function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text) {
+function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text, font) {
     if (distance > maxWidth) {
         var newfontSize = fontSize;
         var decrement = 1;
@@ -90,10 +93,12 @@ function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text) {
         while (distance > maxWidth) {
             newfontSize -= decrement;
             if (newfontSize < minFontSize) {
-                ctx.font = `${minFontSize}px "Burbank Big Rg Bk"`
+                // ctx.font = `${minFontSize}px "Burbank Big Rg Bk"`
+                ctx.font = `${minFontSize}px "${font}"`;
                 break;
             }
-            ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
+            ctx.font = `${newfontSize}px "${font}"`;
+            // ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
             newWidth = ctx.measureText(text).width;
             if(newWidth < maxWidth && decrement === 1){
                 decrement = 0.1;
@@ -102,6 +107,7 @@ function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text) {
                 distance = newWidth;
             }
         }
-        ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
+        ctx.font = `${newfontSize}px "${font}"`;
+        // ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
     }
 }
