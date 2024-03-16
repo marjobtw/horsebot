@@ -67,7 +67,8 @@ module.exports = {
         //Bottom
         ctx.fillStyle = '#ffffff';
         ctx.font = '44px "Rational Display DEMO SemiBold"'
-        let bottomText = `You are our #${guild.memberCount}th member!`
+        // let bottomText = `You are our #${guild.memberCount}th member!`
+        let bottomText = `You are our #${ordinal_suffix_of(guild.memberCount)} member!`
         distance = ctx.measureText(bottomText).width
         getFontsize(600, 44, 16, ctx, distance, bottomText, "Rational Display DEMO SemiBold")
         ctx.fillText(bottomText, 300, texty+60)
@@ -110,4 +111,19 @@ function getFontsize(maxWidth, fontSize, minFontSize, ctx, distance, text, font)
         ctx.font = `${newfontSize}px "${font}"`;
         // ctx.font = `${newfontSize}px "Burbank Big Rg Bk"`;
     }
+}
+
+function ordinal_suffix_of(i) {
+    let j = i % 10,
+        k = i % 100;
+    if (j === 1 && k !== 11) {
+        return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+        return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+        return i + "rd";
+    }
+    return i + "th";
 }
