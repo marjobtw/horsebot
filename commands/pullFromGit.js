@@ -88,7 +88,7 @@ function restartScript(module) {
     console.log('Restarting script...');
     const newProcess = spawn(nodeExecutable, [module], {
         stdio: 'inherit', 
-        detached: true,
+        detached: false,
         shell: true
     });
     
