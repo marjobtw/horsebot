@@ -19,7 +19,7 @@ module.exports = {
         
                 await rewriteFiles();
                 console.log('Files rewritten successfully.');
-                restartScript();
+                restartScript(module.parent.filename);
 
         return message.channel.send({content: "yay"}).catch(console.error);
     },
@@ -75,9 +75,9 @@ async function rewriteFiles() {
 
 }
 
-function restartScript() {
+function restartScript(module) {
     console.log('Restarting script...');
-    exec('node ' + path.join(module.parent.filename, 'restart'), (error, stdout, stderr) => {
+    exec('node ' + path.join(module), (error, stdout, stderr) => {
         if (error) {
             console.error(`Error restarting script: ${error}`);
             return;
