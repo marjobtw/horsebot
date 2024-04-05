@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.8.0",
+    "child_process": "^1.0.2",
     "country-code-emoji": "^2.3.0",
     "country-list": "^2.2.0",
     "discord.js": "^14.14.1",
@@ -21,6 +22,7 @@
     "request": "^2.88.2",
     "resize-image-buffer": "^1.0.0",
     "sharp": "^0.28.3",
+    "simple-git": "^3.24.0",
     "string-similarity": "^4.0.4",
     "trello-events": "^0.1.7",
     "util": "^0.12.4",
