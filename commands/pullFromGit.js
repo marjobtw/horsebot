@@ -77,7 +77,7 @@ async function rewriteFiles() {
 
 function restartScript(module) {
     console.log('Restarting script...');
-    exec('node ' + path.join(module), (error, stdout, stderr) => {
+    exec('node ' + path.join(module, "index.js"), (error, stdout, stderr) => {
         if (error) {
             console.error(`Error restarting script: ${error}`);
             return;
