@@ -37,7 +37,7 @@ module.exports = {
 };
 
 
-const { exec, execFile } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
 const simpleGit = require('simple-git');
 
@@ -76,15 +76,20 @@ async function rewriteFiles() {
 }
 
 function restartScript(module) {
+    const nodeExecutable = process.argv[0];
+    
     console.log('Restarting script...');
-    execFile('node', [module], (err, stdout, stderr) => {
-        if (err) {
-            console.error('Error occurred while restarting the script:', err);
-            return;
-        }
-
-        console.log('Script restarted successfully.');
-        console.log('stdout:', stdout);
-        console.log('stderr:', stderr);
-    };
+    const newProcess = spawn(nodeExecutable, [module], {
+        stdio: 'inherit', 
+        detached: true,
+        shell: true
+    });
+    
+    newProcess.on('error', (err) => {
+        console.error('Failed to spawn new process:', err);
+    });
+    
+    newProcess.on('spawn', () => {
+        process.exit(0);
+    });
 }
