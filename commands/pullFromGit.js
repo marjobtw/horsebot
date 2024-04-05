@@ -21,7 +21,7 @@ module.exports = {
                 console.log('Files rewritten successfully.');
                 restartScript(module.parent.filename);
 
-        return message.channel.send({content: "yay"}).catch(console.error);
+        return message.channel.send({content: "yay"}).catch(console.error).then(() => {process.exit(0)});
     },
 
     async interaction(interaction) {
