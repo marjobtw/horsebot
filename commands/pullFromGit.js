@@ -52,7 +52,7 @@ async function rewriteFiles() {
 
     git.addRemote('origin', repoUrl);
 
-    await git.pull('origin', 'master', (err, update) => {
+    await git.pull('origin', 'main', (err, update) => {
         if (err) {
             console.error('Error occurred while pulling changes:', err);
             return;

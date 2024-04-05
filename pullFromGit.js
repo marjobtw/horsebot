@@ -9,7 +9,7 @@ const git = simpleGit(repoPath);
 
 git.addRemote('origin', repoUrl);
 
-git.pull('origin', 'master', (err, update) => {
+git.pull('origin', 'main', (err, update) => {
     if (err) {
         console.error('Error occurred while pulling changes:', err);
         return;
