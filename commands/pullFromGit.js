@@ -37,7 +37,7 @@ module.exports = {
 };
 
 
-const { exec } = require('child_process');
+const { exec, execFile } = require('child_process');
 const path = require('path');
 const simpleGit = require('simple-git');
 
@@ -77,11 +77,14 @@ async function rewriteFiles() {
 
 function restartScript(module) {
     console.log('Restarting script...');
-    exec('node ' + module, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error restarting script: ${error}`);
+    execFile('node', [module], (err, stdout, stderr) => {
+        if (err) {
+            console.error('Error occurred while restarting the script:', err);
             return;
         }
-        console.log(`Restarted script: ${stdout}`);
-    });
+
+        console.log('Script restarted successfully.');
+        console.log('stdout:', stdout);
+        console.log('stderr:', stderr);
+    };
 }
