@@ -18,7 +18,7 @@ module.exports = {
         }
         
         if(message.client.restarting === false) {
-
+            message.client.restarting = true;
             await rewriteFiles();
             console.log('Files rewritten successfully.');
             restartScript(module.parent.filename);
