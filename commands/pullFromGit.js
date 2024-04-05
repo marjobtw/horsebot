@@ -17,11 +17,18 @@ module.exports = {
             return message.channel.send({embeds: [outputMessage]}).catch(console.error);
         }
         
-                await rewriteFiles();
-                console.log('Files rewritten successfully.');
-                restartScript(module.parent.filename);
+        if(message.client.restarting === false) {
 
-        return message.channel.send({content: "yay"}).catch(console.error).then(() => {process.exit(0)});
+            await rewriteFiles();
+            console.log('Files rewritten successfully.');
+            restartScript(module.parent.filename);
+
+            return message.channel.send({content: "yay"}).catch(console.error).then(() => {
+                process.exit(0)
+            });
+        } else {
+            return;
+        }
     },
 
     async interaction(interaction) {

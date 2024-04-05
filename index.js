@@ -14,6 +14,8 @@ Array.prototype.contains = function (needle) {
     return false;
 }
 
+
+
 const { Client, Collection, MessageActionRow, MessageButton, MessageEmbed, Partials, GatewayIntentBits} = require("discord.js");
 const { readdirSync } = require("fs");
 const { join } = require("path");
@@ -27,6 +29,8 @@ const myIntents = [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, Gat
 const client = new Client({ disableMentions: "everyone", partials: ['MESSAGE', 'CHANNEL', 'REACTION'], intents: myIntents});
 
 var PREFIX = "!"
+
+client.restarting = false;
 
 const log = text => console.log(text)
 
