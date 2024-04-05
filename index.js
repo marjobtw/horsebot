@@ -38,7 +38,7 @@ client.statusText = "Stallion Squad"
 client.statusType = "COMPETING"
 
 //Check these directories at the bot start
-client.searchDirectories = ["commands", "commands/moduleManagement", "commands/selfRoles"]
+client.searchDirectories = ["commands", "commands/selfRoles"]
 
 client.login(process.env.BOT_TOKEN).then(r => log(`Login initialized`));
 client.commands = new Collection();
