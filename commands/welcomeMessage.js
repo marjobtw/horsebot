@@ -35,7 +35,7 @@ module.exports = {
         var profilePicture = buffered;
         const pfp = await Canvas.loadImage(buffered, ({format: 'png'}))
         
-        ctx.drawImage(pfp, 23, 17)
+        ctx.drawImage(pfp, 24, 17)
         
         // const pfp = await Canvas.loadImage(message.user.displayAvatarURL({format: 'png', size: 256}))
         // ctx.drawImage(pfp, 25, 20)
