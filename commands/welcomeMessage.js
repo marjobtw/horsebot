@@ -28,14 +28,14 @@ module.exports = {
         const response = await axios.get(url,  { responseType: 'arraybuffer' })
         const buffer = Buffer.from(response.data, "utf-8")
 
-        const output = await sharp(buffer).resize(247, 247).png().toBuffer();
+        const output = await sharp(buffer).resize(248, 248).png().toBuffer();
         
         let buffered = output;
         
         var profilePicture = buffered;
         const pfp = await Canvas.loadImage(buffered, ({format: 'png'}))
         
-        ctx.drawImage(pfp, 24, 18)
+        ctx.drawImage(pfp, 23, 17)
         
         // const pfp = await Canvas.loadImage(message.user.displayAvatarURL({format: 'png', size: 256}))
         // ctx.drawImage(pfp, 25, 20)
