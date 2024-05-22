@@ -13,6 +13,7 @@ module.exports = {
             .setColor(resolveColor(0x9500ff))
             .setTitle("Boo Hoo")
             .setDescription(`${interaction.fields.getTextInputValue("text_input")}`)
+            .setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL()})
         await interaction.reply({embeds: [outputMessage]});
     }
 };
