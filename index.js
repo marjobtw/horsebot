@@ -198,6 +198,26 @@ client.on('interactionCreate', async interaction => {
     await command.interaction(interaction);
 });
 
+//Modal commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isButton()) return;
+    const interactCmd = interaction.customId;
+    const command =
+        client.commands.get(interactCmd) ||
+        client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(interactCmd));
+    await command.interaction(interaction);
+});
+
+//Modal input commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isModalSubmit()) return;
+    const interactCmd = interaction.customId;
+    const command =
+        client.commands.get(interactCmd) ||
+        client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(interactCmd));
+    await command.interaction(interaction);
+});
+
 const data = [
     {
         name: 'ping',
